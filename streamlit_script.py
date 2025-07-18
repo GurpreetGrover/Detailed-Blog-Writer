@@ -6,10 +6,22 @@ from dotenv import load_dotenv
 load_dotenv()
 
 
+os.environ["LANGCHAIN_TRACING_V2"] = "true"
+# os.environ["LANGCHAIN_API_KEY"] = os.getenv("LANGCHAIN_API_KEY")
+try:
+    os.environ["LANGCHAIN_API_KEY"] = st.secrets["LANGCHAIN_API_KEY"]
+except (KeyError, FileNotFoundError):
+    os.environ["LANGCHAIN_API_KEY"] = os.getenv("LANGCHAIN_API_KEY")
+
 
 from langchain_google_genai import ChatGoogleGenerativeAI
 
-os.environ["GOOGLE_API_KEY"] =os.getenv('GEMINI_API_KEY')
+# os.environ["GOOGLE_API_KEY"] =os.getenv('GEMINI_API_KEY')
+try:
+    os.environ["GOOGLE_API_KEY"] =st.secrets['GEMINI_API_KEY']
+except (KeyError, FileNotFoundError):
+     os.environ["GOOGLE_API_KEY"] =os.getenv('GEMINI_API_KEY')
+
 
 llm = ChatGoogleGenerativeAI(
     model="gemini-2.0-flash",
