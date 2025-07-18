@@ -6,6 +6,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 
+
 from langchain_google_genai import ChatGoogleGenerativeAI
 
 os.environ["GOOGLE_API_KEY"] =os.getenv('GEMINI_API_KEY')
@@ -38,6 +39,8 @@ sequential_chain = SimpleSequentialChain(chains=[idea_formation, Blog_content])
 
 # Run the chain
 # response = sequential_chain.run(input={"topic": "Sustainable Living"})
+
+st.title("Blog Generator")
 
 # Add a text input for the user to enter the blog topic
 topic_input = st.text_input("Enter the blog topic:")
